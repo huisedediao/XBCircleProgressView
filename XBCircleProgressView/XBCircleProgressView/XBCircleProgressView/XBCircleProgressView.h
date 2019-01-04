@@ -39,6 +39,8 @@ typedef enum : NSUInteger {
 @property (nonatomic,strong) UIColor *backgroundColor;
 //文字颜色
 @property (nonatomic,strong) UIColor *textColor;
+    
+- (void)setProgress:(CGFloat)progress animation:(BOOL)animation;
 
 - (void)startAnimation;
 - (void)stopAnimation;

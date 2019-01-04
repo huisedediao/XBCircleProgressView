@@ -191,6 +191,11 @@
         self.timer = nil;
     }
 }
+    
+- (void)setProgress:(CGFloat)progress animation:(BOOL)animation
+{
+    
+}
 
 -(NSMutableDictionary *)dic_textParams
 {
