@@ -8,14 +8,13 @@
 
 #import "XBCircleProgressView.h"
 #import "XBCircleProgressViewConfig.h"
-#import "XBHeader.h"
 
 
 @interface XBCircleProgressView ()
 //起始位置开始算起，增加的角度（M_PI的倍数），最大为2，最小为0
 @property (nonatomic,assign) CGFloat multipleAdd;
 @property (nonatomic,strong) NSTimer *timer;
-@property (nonatomic,strong) NSMutableDictionary *params;
+@property (nonatomic,strong) NSMutableDictionary *dic_textParams;
 @end
 
 @implementation XBCircleProgressView
@@ -32,14 +31,14 @@
     
     //计算圆心和半径
     CGPoint center = CGPointMake(w * 0.5, h * 0.5);
-    CGFloat radius = minW * 0.5 - kCircleBorderWidth;
+    CGFloat radius = minW * 0.5 - self.circleBorderWidth;
 
     CGContextRef context = UIGraphicsGetCurrentContext();
 
     [[UIColor whiteColor] set];
     CGContextFillRect(context, rect);
     
-    CGContextSetLineWidth(context, kCircleBorderWidth);
+    CGContextSetLineWidth(context, self.circleBorderWidth);
     CGContextSaveGState(context);
     
     
@@ -61,41 +60,67 @@
     
 
     //时间
-    NSString *time = [NSString stringWithFormat:@"%d", [self getCurrentTime]];
+//    NSString *time = [NSString stringWithFormat:@"%d", [self getCurrentTime]];
+    NSString *time = [self getCurrentTimeStr];
     //NSLog(@"%d",currentTime);
-    CGSize size = getAdjustSizeWith_text_width_font(time, 44, self.params[NSFontAttributeName]);
-    [time drawInRect:CGRectMake((w - size.width)*0.5, (h - size.height)*0.5, size.width, size.height) withAttributes:self.params];
+    CGSize size = getAdjustSizeWith_text_width_font(time, 44, self.dic_textParams[NSFontAttributeName]);
+    [time drawInRect:CGRectMake((w - size.width)*0.5, (h - size.height)*0.5, size.width, size.height) withAttributes:self.dic_textParams];
 }
 
+//获取前景颜色
 - (UIColor *)getBackgroundColor
 {
-    return self.aniMode == AnimationMode_add ? D11_Color_gray : D11_Color_blue;
+    if (self.backgroundColor)
+    {
+        return self.backgroundColor;
+    }
+    return self.aniMode == AnimationMode_add ? XB_Color_circleProgressView_nor : XB_Color_circleProgressView_pro;
 }
-
+    
+//获取背景颜色
 - (UIColor *)getForegroundColor
 {
-    return self.aniMode == AnimationMode_add ? D11_Color_blue : D11_Color_gray;
+    if (self.foregroundColor)
+    {
+        return self.foregroundColor;
+    }
+    return self.aniMode == AnimationMode_add ? XB_Color_circleProgressView_pro : XB_Color_circleProgressView_nor;
 }
 
+//获取开始的角度
 - (CGFloat)getStartAngle
 {
     return self.aniMode == AnimationMode_add ? (- M_PI * 0.5) : (- M_PI * 0.5);
 }
 
+//获取结束的角度
 - (CGFloat)getEndAngle
 {
     return self.aniMode == AnimationMode_add ? (- M_PI * (0.5 + self.multipleAdd)) : (M_PI * (- 0.5 + self.multipleAdd));
 }
 
+//获取画圆的方向
 - (int)getDirection
 {
     return self.aniMode == AnimationMode_add ? (1) : (0);
 }
 
+//获取当前时间，跑了几秒了
 - (int)getCurrentTime
 {
     int currentTime = self.multipleAdd / [self getMultipleAddEveryTime] / kFps;
-    return self.aniMode == AnimationMode_add ? currentTime : (int)(self.waitTime - currentTime);
+    return currentTime;
+}
+
+//获取显示的文字
+- (NSString *)getCurrentTimeStr
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(progressViewTitleForSeconds:totalSeconds:)])
+    {
+        return [self.delegate progressViewTitleForSeconds:[self getCurrentTime] totalSeconds:self.waitTime];
+    }
+    int time = self.aniMode == AnimationMode_add ? [self getCurrentTime] : (int)(self.waitTime - [self getCurrentTime]);
+    return [NSString stringWithFormat:@"%d", time];
 }
 
 -(void)dealloc
@@ -105,17 +130,20 @@
     NSLog(@"XBCircleProgressView销毁");
 }
 
+//开始
 - (void)startAnimation
 {
     self.multipleAdd = 0;
     [self startTimer];
 }
 
+//结束
 - (void)stopAnimation
 {
     [self stopTimer];
 }
 
+//获取每次定时器回调时，增加的进度
 - (CGFloat)getMultipleAddEveryTime
 {
     if (self.waitTime <= 0)
@@ -164,18 +192,36 @@
     }
 }
 
--(NSMutableDictionary *)params
+-(NSMutableDictionary *)dic_textParams
 {
-    if (_params == nil)
+    if (_dic_textParams == nil)
     {
-        UIFont *font = D11_Font(GWidthAdjust_ip6(30));
+        UIColor *textColor = nil;
+        if (self.textColor)
+        {
+            textColor = self.textColor;
+        }
+        if (textColor == nil)
+        {
+            textColor = [self getForegroundColor];
+        }
+        UIFont *font = XB_Font(XB_GWidthAdjust_ip6(30));
         NSMutableDictionary *params = [NSMutableDictionary new];
         params[NSFontAttributeName] = font;
-        params[NSForegroundColorAttributeName] = D11_Color_blue;
+        params[NSForegroundColorAttributeName] = textColor;
     
-        _params = params;
+        _dic_textParams = params;
     }
-    return _params;
+    return _dic_textParams;
+}
+
+- (CGFloat)circleBorderWidth
+{
+    if (_circleBorderWidth == 0)
+    {
+        return 5;
+    }
+    return _circleBorderWidth;
 }
 
 @end

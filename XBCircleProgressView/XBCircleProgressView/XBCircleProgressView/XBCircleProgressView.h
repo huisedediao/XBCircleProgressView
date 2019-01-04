@@ -12,7 +12,9 @@
 
 @protocol XBCircleProgressViewDelegate <NSObject>
 
+@optional
 - (void)progressViewDidEndAnimation:(XBCircleProgressView *)progressView;
+- (NSString *)progressViewTitleForSeconds:(int)seconds totalSeconds:(int)totalSeconds;
 
 @end
 
@@ -25,10 +27,18 @@ typedef enum : NSUInteger {
 
 
 @property (nonatomic,weak) id<XBCircleProgressViewDelegate>delegate;
-
+//圆圈边缘宽度,默认5
+@property (nonatomic,assign) CGFloat circleBorderWidth;
 @property (nonatomic,assign) AnimationMode aniMode;
 ///等待时间（就是动画跑完的时间）
 @property (nonatomic,assign) CGFloat waitTime;
+    
+//前景色
+@property (nonatomic,strong) UIColor *foregroundColor;
+//背景色
+@property (nonatomic,strong) UIColor *backgroundColor;
+//文字颜色
+@property (nonatomic,strong) UIColor *textColor;
 
 - (void)startAnimation;
 - (void)stopAnimation;
