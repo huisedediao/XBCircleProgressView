@@ -26,7 +26,7 @@
     _circleView = circleView;
     circleView.delegate = self;
     circleView.direction = XBCircleProgressViewDirection_anticlockwise;
-    circleView.frame = CGRectMake(100, 100, 200, 200);
+    circleView.frame = CGRectMake(50, 240, 200, 200);
     circleView.waitTime = 10;
     circleView.circleBorderWidth = 5;
 //    circleView.backgroundColor = [UIColor grayColor];
