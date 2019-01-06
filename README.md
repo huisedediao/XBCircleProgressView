@@ -1,7 +1,7 @@
 # XBCircleProgressView
 圆圈倒计时的动画效果
 <br/>
-####支持设置方向、设置进度（带先快后慢动画）、支持设置前景色、后景色
+支持设置方向、设置进度（带先快后慢动画）、支持设置前景色、后景色
 <br>
 ### 效果图：
 ![image](https://github.com/huisedediao/XBCircleProgressView/raw/master/show.gif)<br/>
