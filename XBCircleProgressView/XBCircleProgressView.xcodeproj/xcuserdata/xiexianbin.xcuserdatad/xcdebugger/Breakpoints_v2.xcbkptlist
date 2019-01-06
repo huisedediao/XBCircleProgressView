@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "XBCircleProgressView/XBCircleProgressView/XBCircleProgressView.m"
+            timestampString = "568455138.925474"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
+            landmarkName = "-updateDisplayWithMultipleAddValue:endValue:interval:difValue:addition:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[XBCircleProgressView updateDisplayWithMultipleAddValue:endValue:interval:difValue:addition:]"
+                  moduleName = "XBCircleProgressView"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/xiexianbin/git/github/XBCircleProgressView/XBCircleProgressView/XBCircleProgressView/XBCircleProgressView/XBCircleProgressView.m"
+                  timestampString = "568454269.456414"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "104"
+                  endingLineNumber = "104"
+                  offsetFromSymbolStart = "46">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[XBCircleProgressView updateDisplayWithMultipleAddValue:endValue:interval:difValue:addition:]"
+                  moduleName = "XBCircleProgressView"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/xiexianbin/git/github/XBCircleProgressView/XBCircleProgressView/XBCircleProgressView/XBCircleProgressView/XBCircleProgressView.m"
+                  timestampString = "568454269.458546"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "104"
+                  endingLineNumber = "104"
+                  offsetFromSymbolStart = "176">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
