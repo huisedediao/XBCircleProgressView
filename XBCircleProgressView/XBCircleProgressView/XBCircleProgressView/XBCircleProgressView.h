@@ -37,11 +37,10 @@ typedef enum : NSUInteger {
 @property (nonatomic,assign) XBCircleProgressViewDirection direction;
 ///等待时间（就是动画跑完的时间）
 @property (nonatomic,assign) CGFloat waitTime;
-    
 ///前景色
-@property (nonatomic,strong) UIColor *color_foreground;
+@property (nonatomic,strong) UIColor *color_borderForeground;
 ///背景色
-@property (nonatomic,strong) UIColor *color_background;
+@property (nonatomic,strong) UIColor *color_borderBackground;
 ///文字标签
 @property (nonatomic,strong) UILabel *lb_text;
 /**

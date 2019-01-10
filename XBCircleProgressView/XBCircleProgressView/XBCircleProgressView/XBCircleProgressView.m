@@ -42,7 +42,7 @@
 
     CGContextRef context = UIGraphicsGetCurrentContext();
 
-    [[UIColor whiteColor] set];
+    [self.backgroundColor set];
     CGContextFillRect(context, rect);
     
     CGContextSetLineCap(context, kCGLineCapRound);
@@ -52,7 +52,7 @@
     
     
     //背景圆
-    CGContextSetStrokeColorWithColor(context, self.color_background.CGColor);
+    CGContextSetStrokeColorWithColor(context, self.color_borderBackground.CGColor);
     CGContextAddArc(context, center.x, center.y, radius_fore, 0, M_PI * 2, 0);
     CGContextDrawPath(context, kCGPathStroke);
     
@@ -62,7 +62,7 @@
     
     CGContextSetLineWidth(context, self.f_borderWidthForeground);
     //前景圆
-    CGContextSetStrokeColorWithColor(context, self.color_foreground.CGColor);
+    CGContextSetStrokeColorWithColor(context, self.color_borderForeground.CGColor);
     //最后一个参数，决定圆是顺时针画还是逆时针画，0是顺时针
     //但是前面的两个参数：起始位置，终止位置，都是按照x轴方向，顺时针来计算的
     CGContextAddArc(context, center.x, center.y, radius_back, [self getStartAngle], [self getEndAngle], self.direction);
@@ -281,22 +281,22 @@
     return _f_borderWidthForeground;
 }
 
-- (UIColor *)color_foreground
+- (UIColor *)color_borderBackground
 {
-    if (_color_foreground == nil)
+    if (_color_borderBackground == nil)
     {
         return XB_Color_circleProgressView_foreground;
     }
-    return _color_foreground;
+    return _color_borderBackground;
 }
 
-- (UIColor *)color_background
+- (UIColor *)color_borderForeground
 {
-    if (_color_background == nil)
+    if (_color_borderForeground == nil)
     {
         return XB_Color_circleProgressView_background;
     }
-    return _color_background;
+    return _color_borderForeground;
 }
 
 
