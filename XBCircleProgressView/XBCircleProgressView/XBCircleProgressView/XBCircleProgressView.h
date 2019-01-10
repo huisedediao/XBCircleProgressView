@@ -29,17 +29,19 @@ typedef enum : NSUInteger {
 @interface XBCircleProgressView : UIView
 
 @property (nonatomic,weak) id<XBCircleProgressViewDelegate>delegate;
-///圆圈边缘宽度,默认5
-@property (nonatomic,assign) CGFloat circleBorderWidth;
+///前景圆圈边缘宽度,默认5
+@property (nonatomic,assign) CGFloat f_borderWidthForeground;
+///背景圆圈边缘宽度,默认5
+@property (nonatomic,assign) CGFloat f_borderWidthBackground;
 ///方向，顺时针还是逆时针
 @property (nonatomic,assign) XBCircleProgressViewDirection direction;
 ///等待时间（就是动画跑完的时间）
 @property (nonatomic,assign) CGFloat waitTime;
     
 ///前景色
-@property (nonatomic,strong) UIColor *foregroundColor;
+@property (nonatomic,strong) UIColor *color_foreground;
 ///背景色
-@property (nonatomic,strong) UIColor *backgroundColor;
+@property (nonatomic,strong) UIColor *color_background;
 ///文字标签
 @property (nonatomic,strong) UILabel *lb_text;
 /**

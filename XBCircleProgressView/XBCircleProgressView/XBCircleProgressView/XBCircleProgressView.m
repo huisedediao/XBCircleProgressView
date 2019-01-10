@@ -33,33 +33,39 @@
     
     CGFloat minW = w < h ? w : h;
     
+    CGFloat borderMax = self.f_borderWidthForeground > self.f_borderWidthBackground ? self.f_borderWidthForeground : self.f_borderWidthBackground;
+    
     //计算圆心和半径
     CGPoint center = CGPointMake(w * 0.5, h * 0.5);
-    CGFloat radius = minW * 0.5 - self.circleBorderWidth;
+    CGFloat radius_fore = minW * 0.5 - borderMax;
+    CGFloat radius_back = minW * 0.5 - borderMax;
 
     CGContextRef context = UIGraphicsGetCurrentContext();
 
     [[UIColor whiteColor] set];
     CGContextFillRect(context, rect);
     
-    CGContextSetLineWidth(context, self.circleBorderWidth);
+    CGContextSetLineCap(context, kCGLineCapRound);
+    
     CGContextSaveGState(context);
+    CGContextSetLineWidth(context, self.f_borderWidthBackground);
     
     
     //背景圆
-    CGContextSetStrokeColorWithColor(context, self.backgroundColor.CGColor);
-    CGContextAddArc(context, center.x, center.y, radius, 0, M_PI * 2, 0);
+    CGContextSetStrokeColorWithColor(context, self.color_background.CGColor);
+    CGContextAddArc(context, center.x, center.y, radius_fore, 0, M_PI * 2, 0);
     CGContextDrawPath(context, kCGPathStroke);
     
     
     CGContextRestoreGState(context);
     
     
+    CGContextSetLineWidth(context, self.f_borderWidthForeground);
     //前景圆
-    CGContextSetStrokeColorWithColor(context, self.foregroundColor.CGColor);
+    CGContextSetStrokeColorWithColor(context, self.color_foreground.CGColor);
     //最后一个参数，决定圆是顺时针画还是逆时针画，0是顺时针
     //但是前面的两个参数：起始位置，终止位置，都是按照x轴方向，顺时针来计算的
-    CGContextAddArc(context, center.x, center.y, radius, [self getStartAngle], [self getEndAngle], self.direction);
+    CGContextAddArc(context, center.x, center.y, radius_back, [self getStartAngle], [self getEndAngle], self.direction);
     CGContextDrawPath(context, kCGPathStroke);
     
     //设置文字
@@ -257,31 +263,41 @@
     return _lb_text;
 }
 
-- (CGFloat)circleBorderWidth
+- (CGFloat)f_borderWidthBackground
 {
-    if (_circleBorderWidth == 0)
+    if (_f_borderWidthBackground == 0)
     {
         return 5;
     }
-    return _circleBorderWidth;
+    return _f_borderWidthBackground;
 }
 
-- (UIColor *)backgroundColor
+- (CGFloat)f_borderWidthForeground
 {
-    if (_backgroundColor == nil)
+    if (_f_borderWidthForeground == 0)
     {
-        return XB_Color_circleProgressView_background;
+        return 5;
     }
-    return _backgroundColor;
+    return _f_borderWidthForeground;
 }
 
-- (UIColor *)foregroundColor
+- (UIColor *)color_foreground
 {
-    if (_foregroundColor == nil)
+    if (_color_foreground == nil)
     {
         return XB_Color_circleProgressView_foreground;
     }
-    return _foregroundColor;
+    return _color_foreground;
 }
+
+- (UIColor *)color_background
+{
+    if (_color_background == nil)
+    {
+        return XB_Color_circleProgressView_background;
+    }
+    return _color_background;
+}
+
 
 @end

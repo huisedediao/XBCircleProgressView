@@ -28,11 +28,12 @@
     circleView.direction = XBCircleProgressViewDirection_anticlockwise;
     circleView.frame = CGRectMake(50, 240, 200, 200);
     circleView.waitTime = 10;
-    circleView.circleBorderWidth = 5;
+    circleView.f_borderWidthForeground = 8;
+    circleView.f_borderWidthBackground = 5;
 //    circleView.backgroundColor = [UIColor grayColor];
 //    circleView.foregroundColor = [UIColor redColor];
 //    [circleView setProgress:0.5 animation:YES];
-//    [circleView startAnimation];
+    [circleView startAnimation];
 }
 - (IBAction)changeProgress:(id)sender {
     [_circleView setProgress:0.2 animation:YES];
