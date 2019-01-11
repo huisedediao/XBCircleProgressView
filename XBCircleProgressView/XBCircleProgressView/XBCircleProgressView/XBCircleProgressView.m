@@ -86,6 +86,11 @@
 
 - (void)setProgress:(CGFloat)progress animation:(BOOL)animation
 {
+    KWeakSelf
+    if (self.delegate && [self.delegate respondsToSelector:@selector(circleProgressViewStartSetProgress:)])
+    {
+        [self.delegate circleProgressViewStartSetProgress:weakSelf];
+    }
     if (progress > 1)
     {
         NSLog(@"进度不能大于1");
@@ -96,6 +101,11 @@
     {
         self.multipleAdd = endValue;
         [self setNeedsDisplay];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(circleProgressViewDidSettedProgress:)])
+        {
+            KWeakSelf
+            [self.delegate circleProgressViewDidSettedProgress:weakSelf];
+        }
     }
     else
     {

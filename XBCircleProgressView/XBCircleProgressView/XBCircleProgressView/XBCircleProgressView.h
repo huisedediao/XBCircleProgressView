@@ -15,6 +15,7 @@
 @optional
 ///
 - (void)circleProgressViewOnTheEnd:(XBCircleProgressView *)progressView;
+- (void)circleProgressViewStartSetProgress:(XBCircleProgressView *)progressView;
 - (void)circleProgressViewDidSettedProgress:(XBCircleProgressView *)progressView;
 ///返回文本或者富文本
 - (id)circleProgressView:(XBCircleProgressView *)progressView titleForSeconds:(int)seconds totalSeconds:(int)totalSeconds;
