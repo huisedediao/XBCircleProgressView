@@ -114,6 +114,11 @@
         CGFloat dif = ABS(endValue - self.multipleAdd);
         if (dif == 0)
         {
+            if (self.delegate && [self.delegate respondsToSelector:@selector(circleProgressViewDidSettedProgress:)])
+            {
+                KWeakSelf
+                [self.delegate circleProgressViewDidSettedProgress:weakSelf];
+            }
             return;
         }
         CGFloat addValue = dif / kFps;//动画时间定，kFps定，为了在动画时间内做完动画，计算出每次增加的量
