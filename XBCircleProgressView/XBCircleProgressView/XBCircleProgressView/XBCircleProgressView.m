@@ -86,6 +86,11 @@
 
 - (void)setProgress:(CGFloat)progress animation:(BOOL)animation
 {
+    if (progress > 1)
+    {
+        NSLog(@"进度不能大于1");
+        progress = 1;
+    }
     CGFloat endValue = progress * 2.0;
     if (animation == NO)
     {
@@ -105,19 +110,24 @@
 
 - (void)updateDisplayWithMultipleAddValue:(CGFloat)addValue endValue:(CGFloat)endValue interval:(CGFloat)interval difValue:(CGFloat)difValue addition:(BOOL)addition
 {
-    //为了前面快后面慢的效果
-    CGFloat xi = ABS(self.multipleAdd - endValue) / difValue;
-    if (addition)
+    CGFloat tempDif = ABS(self.multipleAdd - endValue);
+    if (tempDif < difValue * 0.01)
     {
-        self.multipleAdd += addValue * (xi * 2);
+        tempDif = 0;
+        self.multipleAdd = endValue;
     }
     else
     {
-        self.multipleAdd -= addValue * (xi * 2);
-    }
-    if (ABS(self.multipleAdd - endValue) < addValue)
-    {
-        self.multipleAdd = endValue;
+        //为了前面快后面慢的效果
+        CGFloat xi = tempDif / difValue;
+        if (addition)
+        {
+            self.multipleAdd += addValue * (xi * 2);
+        }
+        else
+        {
+            self.multipleAdd -= addValue * (xi * 2);
+        }
     }
     
     [self updateDisplayWithMutipleValue:self.multipleAdd];
