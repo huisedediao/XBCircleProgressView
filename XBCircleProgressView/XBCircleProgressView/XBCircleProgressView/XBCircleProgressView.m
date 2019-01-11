@@ -110,6 +110,10 @@
 
 - (void)updateDisplayWithMultipleAddValue:(CGFloat)addValue endValue:(CGFloat)endValue interval:(CGFloat)interval difValue:(CGFloat)difValue addition:(BOOL)addition
 {
+    if (ABS(endValue - 2.0) < 2.0 * 0.01)
+    {
+        endValue = 2.0;
+    }
     CGFloat tempDif = ABS(self.multipleAdd - endValue);
     if (tempDif < difValue * 0.01)
     {
