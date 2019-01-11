@@ -112,6 +112,10 @@
         [self stopAnimation];
         
         CGFloat dif = ABS(endValue - self.multipleAdd);
+        if (dif == 0)
+        {
+            return;
+        }
         CGFloat addValue = dif / kFps;//动画时间定，kFps定，为了在动画时间内做完动画，计算出每次增加的量
         CGFloat interval = XB_circleProgressView_animationTime / kFps;
         [self updateDisplayWithMultipleAddValue:addValue endValue:endValue interval:interval difValue:dif addition:(endValue > self.multipleAdd)];
