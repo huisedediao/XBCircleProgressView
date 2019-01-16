@@ -65,7 +65,7 @@
     CGContextSetStrokeColorWithColor(context, self.color_borderForeground.CGColor);
     //最后一个参数，决定圆是顺时针画还是逆时针画，0是顺时针
     //但是前面的两个参数：起始位置，终止位置，都是按照x轴方向，顺时针来计算的
-    CGContextAddArc(context, center.x, center.y, radius_back, [self getStartAngle], [self getEndAngle], self.direction);
+    CGContextAddArc(context, center.x, center.y, radius_back, [self getStartAngle], [self getEndAngle], [self getAnimationDirection]);
     CGContextDrawPath(context, kCGPathStroke);
     
     //设置文字
@@ -134,12 +134,13 @@
 
 - (void)updateDisplayWithMultipleAddValue:(CGFloat)addValue endValue:(CGFloat)endValue interval:(CGFloat)interval difValue:(CGFloat)difValue addition:(BOOL)addition
 {
-    if (ABS(endValue - 2.0) < 2.0 * 0.01)
+    CGFloat scale = 0.01;
+    if (ABS(endValue - 2.0) < 2.0 * scale)
     {
         endValue = 2.0;
     }
     CGFloat tempDif = ABS(self.multipleAdd - endValue);
-    if (tempDif < difValue * 0.01)
+    if (tempDif < difValue * scale)
     {
         tempDif = 0;
         self.multipleAdd = endValue;
@@ -225,13 +226,45 @@
 //获取结束的角度
 - (CGFloat)getEndAngle
 {
-    if (self.direction == XBCircleProgressViewDirection_clockwise)
+    if (self.order == XBCircleProgressViewOrder_nor)
     {
-        return [self getStartAngle] + (M_PI * self.multipleAdd);
+        if (self.direction == XBCircleProgressViewDirection_clockwise)
+        {
+            return [self getStartAngle] + (M_PI * self.multipleAdd);
+        }
+        else
+        {
+            return [self getStartAngle] - (M_PI * self.multipleAdd);
+        }
     }
     else
     {
-        return [self getStartAngle] - (M_PI * self.multipleAdd);
+        CGFloat sacle = 1.004;
+        if (self.direction == XBCircleProgressViewDirection_clockwise)
+        {
+            return [self getStartAngle] - (M_PI * (2 * sacle - self.multipleAdd));
+        }
+        else
+        {
+            return [self getStartAngle] + (M_PI * (2 * sacle - self.multipleAdd));
+        }
+    }
+}
+
+- (int)getAnimationDirection
+{
+//    return self.direction;
+    if (self.order == XBCircleProgressViewOrder_nor)
+    {
+        return self.direction;
+    }
+    else
+    {
+        if (self.direction == XBCircleProgressViewDirection_clockwise)
+        {
+            return XBCircleProgressViewDirection_anticlockwise;
+        }
+        return XBCircleProgressViewDirection_clockwise;
     }
 }
 

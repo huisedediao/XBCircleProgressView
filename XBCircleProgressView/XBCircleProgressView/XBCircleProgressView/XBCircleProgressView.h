@@ -27,6 +27,12 @@ typedef enum : NSUInteger {
     XBCircleProgressViewDirection_anticlockwise             //逆时针
 } XBCircleProgressViewDirection;
 
+typedef enum : NSUInteger {
+    XBCircleProgressViewOrder_nor,                          //正序，前景覆盖面从少到多
+    XBCircleProgressViewOrder_reverse                       //倒序，前景覆盖面从多到少
+} XBCircleProgressViewOrder;
+//reverse
+
 @interface XBCircleProgressView : UIView
 
 @property (nonatomic,weak) id<XBCircleProgressViewDelegate>delegate;
@@ -36,6 +42,8 @@ typedef enum : NSUInteger {
 @property (nonatomic,assign) CGFloat f_borderWidthBackground;
 ///方向，顺时针还是逆时针
 @property (nonatomic,assign) XBCircleProgressViewDirection direction;
+///顺序，是正序还是倒序
+@property (nonatomic,assign) XBCircleProgressViewDirection order;
 ///等待时间（就是动画跑完的时间）
 @property (nonatomic,assign) CGFloat waitTime;
 ///前景色
