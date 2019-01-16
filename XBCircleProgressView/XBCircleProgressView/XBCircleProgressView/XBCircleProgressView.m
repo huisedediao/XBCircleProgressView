@@ -84,6 +84,11 @@
     [self stopTimer];
 }
 
+- (BOOL)isAnimationing
+{
+    return self.timer.isValid;
+}
+
 - (void)setProgress:(CGFloat)progress animation:(BOOL)animation
 {
     KWeakSelf

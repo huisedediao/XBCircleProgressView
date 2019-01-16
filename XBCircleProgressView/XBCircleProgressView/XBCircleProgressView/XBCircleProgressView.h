@@ -52,4 +52,6 @@ typedef enum : NSUInteger {
 - (void)startAnimation;
 - (void)stopAnimation;
 
+//是否正在执行动画
+- (BOOL)isAnimationing;
 @end
