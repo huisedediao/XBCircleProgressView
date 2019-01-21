@@ -34,7 +34,7 @@
 //    circleView.backgroundColor = [UIColor grayColor];
 //    circleView.foregroundColor = [UIColor redColor];
 //    [circleView setProgress:0.5 animation:YES];
-//    [circleView startAnimation];
+    [circleView startAnimation];
 }
 - (IBAction)changeProgress:(id)sender {
     static CGFloat progress = 0.2;
@@ -59,6 +59,7 @@
     
 - (id)circleProgressView:(XBCircleProgressView *)progressView titleForSeconds:(int)seconds totalSeconds:(int)totalSeconds
 {
+    NSLog(@"current progress %.2f",progressView.currentProgress);
     return [NSString stringWithFormat:@"%d",seconds];
 }
 

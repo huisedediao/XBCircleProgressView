@@ -56,6 +56,8 @@ typedef enum : NSUInteger {
  注意，如果animation为YES，如果原来有动画，动画会停止
  */
 - (void)setProgress:(CGFloat)progress animation:(BOOL)animation;
+///获取当前进度
+- (CGFloat)currentProgress;
 
 - (void)startAnimation;
 - (void)stopAnimation;

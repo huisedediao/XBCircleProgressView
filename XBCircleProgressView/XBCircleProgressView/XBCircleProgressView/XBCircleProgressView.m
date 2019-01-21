@@ -132,6 +132,11 @@
     }
 }
 
+- (CGFloat)currentProgress
+{
+    return self.multipleAdd / 2.0;
+}
+
 - (void)updateDisplayWithMultipleAddValue:(CGFloat)addValue endValue:(CGFloat)endValue interval:(CGFloat)interval difValue:(CGFloat)difValue addition:(BOOL)addition
 {
     CGFloat scale = 0.01;

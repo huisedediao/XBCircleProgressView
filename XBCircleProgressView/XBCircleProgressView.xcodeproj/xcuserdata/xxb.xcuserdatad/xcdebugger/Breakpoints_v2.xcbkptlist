@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "XBCircleProgressView/XBCircleProgressView/XBCircleProgressView.m"
-            timestampString = "569321487.354805"
+            timestampString = "569755668.448282"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
-            landmarkName = "-getEndAngle"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
+            landmarkName = "-getStartAngle"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
